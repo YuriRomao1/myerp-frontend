@@ -4,6 +4,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -15,7 +16,8 @@ import { MatListModule } from '@angular/material/list';
     MatSidenavModule,
     MatButtonModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    RouterModule
   ]
 })
 export class NavComponent implements OnInit {
@@ -25,4 +27,8 @@ export class NavComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  logout(): void {
+    console.log('Logout realizado');
+    // Implementar lógica de logout aqui
+  }
 }
