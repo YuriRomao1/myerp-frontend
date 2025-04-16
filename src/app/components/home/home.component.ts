@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  standalone: true, // Configurado como standalone
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrls: ['./home.component.css'],
+  imports: [MatCardModule] // Importação do MatCardModule
 })
-export class HomeComponent {
-
-}
+export class HomeComponent { }
