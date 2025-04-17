@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { Router, RouterModule } from '@angular/router';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-nav',
@@ -17,7 +18,8 @@ import { Router, RouterModule } from '@angular/router';
     MatButtonModule,
     MatIconModule,
     MatListModule,
-    RouterModule
+    RouterModule,
+    HeaderComponent
   ]
 })
 export class NavComponent implements OnInit {
