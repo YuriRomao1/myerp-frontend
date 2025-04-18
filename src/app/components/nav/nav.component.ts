@@ -1,37 +1,30 @@
 import { Component, OnInit } from '@angular/core';
-import { MatToolbarModule } from '@angular/material/toolbar';
+import { Router } from '@angular/router';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { Router, RouterModule } from '@angular/router';
-import { HeaderComponent } from '../header/header.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { HeaderComponent } from "../header/header.component";
+import { RouterOutlet } from '@angular/router';
 
-@Component({
+
+
+ @Component({
   selector: 'app-nav',
+  standalone: true, // Configurado como standalone
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.css'],
-  standalone: true,
   imports: [
-    MatToolbarModule,
-    MatSidenavModule,
+    MatSidenavModule, // Para o <mat-drawer-container> e <mat-drawer>
+    MatListModule, // Para o <mat-nav-list> e <mat-list-item>
+    MatIconModule, // Para os ícones <mat-icon>
     MatButtonModule,
-    MatIconModule,
-    MatListModule,
-    RouterModule,
-    HeaderComponent
-  ]
+    HeaderComponent,
+    RouterOutlet
+]
 })
-export class NavComponent implements OnInit {
-
-  constructor(private router: Router ) { }
-
-  ngOnInit(): void {
-    this.router.navigate(['home'])
-  }
-
-  logout(): void {
-    console.log('Logout realizado');
-    // Implementar lógica de logout aqui
+export class NavComponent {
+  logout() {
+    console.log('Logout acionado!');
   }
 }
