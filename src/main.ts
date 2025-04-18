@@ -9,6 +9,6 @@ bootstrapApplication(AppComponent, {
   providers: [
     provideRouter(routes),
     provideHttpClient(),
-    BrowserAnimationsModule // Necessário para Angular Material
+    BrowserAnimationsModule
   ]
 }).catch(err => console.error(err));

@@ -6,24 +6,31 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { HeaderComponent } from "../header/header.component";
 import { RouterOutlet } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 
-
- @Component({
+@Component({
   selector: 'app-nav',
-  standalone: true, // Configurado como standalone
+  standalone: true,
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.css'],
   imports: [
-    MatSidenavModule, // Para o <mat-drawer-container> e <mat-drawer>
-    MatListModule, // Para o <mat-nav-list> e <mat-list-item>
-    MatIconModule, // Para os ícones <mat-icon>
+    MatSidenavModule,
+    MatListModule,
+    MatIconModule,
     MatButtonModule,
     HeaderComponent,
-    RouterOutlet
+    RouterOutlet,
+    RouterModule
 ]
 })
 export class NavComponent {
+  constructor(private router: Router) {}
+
+  ngOnInit() {
+    this.router.navigate(['home']);
+  }
+
   logout() {
     console.log('Logout acionado!');
   }
