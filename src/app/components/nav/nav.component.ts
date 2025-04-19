@@ -28,7 +28,7 @@ export class NavComponent {
   constructor(private router: Router) {}
 
   ngOnInit() {
-    this.router.navigate(['home']);
+    this.router.navigate(['tecnico']);
   }
 
   logout() {
