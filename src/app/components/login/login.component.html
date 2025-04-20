@@ -1,23 +1,38 @@
-<div class="container" >
-  <form class="form  mat-elevation-z8">
-
+<div class="container">
+  <form #form="ngForm" class="form mat-elevation-z8">
     <h1 class="title">MyERP</h1>
 
     <img src="assets/img/login-image.svg" alt="MyERP Login">
 
     <mat-form-field class="full-width" appearance="fill">
       <mat-label>E-mail</mat-label>
-      <input matInput placeholder="Ex. nome@mail.com">
+      <input
+        [(ngModel)]="creds.email"
+        name="email"
+        required
+        email
+        matInput
+        placeholder="Ex. nome@mail.com">
     </mat-form-field>
 
     <mat-form-field class="full-width" appearance="fill">
       <mat-label>Senha</mat-label>
-      <input type="password" matInput placeholder="Ex. 123">
+      <input
+        [(ngModel)]="creds.senha"
+        name="senha"
+        type="password"
+        required
+        minlength="3"
+        matInput
+        placeholder="Ex. 123">
     </mat-form-field>
 
-    <button class="full-width mat-elevation-z4" mat-flat-button color="primary">Primary</button>
-
+    <button
+      [disabled]="!form.valid"
+      class="full-width mat-elevation-z4"
+      mat-flat-button
+      color="primary">
+      Entrar
+    </button>
   </form>
-
-
 </div>
