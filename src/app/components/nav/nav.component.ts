@@ -7,6 +7,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { HeaderComponent } from "../header/header.component";
 import { RouterOutlet } from '@angular/router';
 import { RouterModule } from '@angular/router';
+import { AuthService } from 'src/app/services/auth/auth.component';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -25,13 +27,17 @@ import { RouterModule } from '@angular/router';
 ]
 })
 export class NavComponent {
-  constructor(private router: Router) {}
+  constructor(private router: Router,
+    private authService: AuthService,
+    private toast: ToastrService) {}
 
   ngOnInit() {
     this.router.navigate(['tecnico']);
   }
 
   logout() {
-    console.log('Logout acionado!');
+    this.router.navigate(['login'])
+    this.authService.logout();
+    this.toast.info('Logout realizado com sucesso!', 'Logout', {  timeOut: 7000 });
   }
 }
