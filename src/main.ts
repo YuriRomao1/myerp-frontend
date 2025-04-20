@@ -3,12 +3,18 @@ import { AppComponent } from './app/app.component';
 import { provideRouter } from '@angular/router';
 import { routes } from './app/app-routing.module';
 import { provideHttpClient } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideToastr } from 'ngx-toastr';
 
 bootstrapApplication(AppComponent, {
   providers: [
     provideRouter(routes),
     provideHttpClient(),
-    BrowserAnimationsModule
+    provideAnimations(),
+    provideToastr({
+      timeOut: 4000,
+      closeButton: true,
+      progressBar: true
+    } )
   ]
 }).catch(err => console.error(err));
