@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { AuthService } from 'src/app/services/auth/auth.component';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,9 +18,5 @@ export class AuthGuard implements CanActivate {
       this.router.navigate(['login']);
       return false;
     }
-  }
-
-  isAuthenticated() {
-    throw new Error('Method not implemented.');
   }
 }

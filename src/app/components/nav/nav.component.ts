@@ -7,9 +7,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { HeaderComponent } from "../header/header.component";
 import { RouterOutlet } from '@angular/router';
 import { RouterModule } from '@angular/router';
-import { AuthService } from 'src/app/services/auth/auth.component';
+import { AuthService } from 'src/app/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
-
 
 @Component({
   selector: 'app-nav',
@@ -32,7 +31,7 @@ export class NavComponent {
     private toast: ToastrService) {}
 
   ngOnInit() {
-    this.router.navigate(['tecnico']);
+    this.router.navigate(['tecnicos']);
   }
 
   logout() {
