@@ -7,6 +7,8 @@ import { TecnicoService } from 'src/app/services/tecnico.service';
 import { OnInit } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { RouterModule } from '@angular/router';
+
 
 @Component({
   selector: 'app-tecnico',
@@ -18,7 +20,8 @@ import { MatInputModule } from '@angular/material/input';
     MatTableModule,
     MatPaginatorModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    RouterModule
   ],
 })
 export class TecnicoComponent implements OnInit, AfterViewInit {
