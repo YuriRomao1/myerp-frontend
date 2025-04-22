@@ -5,15 +5,20 @@ import { CommonModule } from '@angular/common';
 import { Tecnico } from 'src/app/model/tecnico';
 import { TecnicoService } from 'src/app/services/tecnico.service';
 import { OnInit } from '@angular/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-tecnico',
   templateUrl: './tecnico.component.html',
   styleUrls: ['./tecnico.component.css'],
+  standalone: true,
   imports: [
     CommonModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
 })
 export class TecnicoComponent implements OnInit, AfterViewInit {
@@ -28,12 +33,12 @@ export class TecnicoComponent implements OnInit, AfterViewInit {
     private service: TecnicoService
   ) {}
 
-  ngOnInit() {
-    this.findAll();
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
   }
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
+  ngOnInit() {
+    this.findAll();
   }
 
   findAll() {
@@ -43,5 +48,9 @@ export class TecnicoComponent implements OnInit, AfterViewInit {
       this.dataSource.paginator = this.paginator;
     });
   }
-}
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+}

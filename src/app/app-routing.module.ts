@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { NavComponent } from './components/nav/nav.component';
 import { HomeComponent } from './components/home/home.component';
-import { TecnicoComponent } from './components/tecnico/tecnico.component';
+import { TecnicoComponent } from './components/tecnico/List/tecnico.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './auth/auth.guard';
 

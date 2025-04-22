@@ -2,20 +2,22 @@ import { bootstrapApplication } from '@angular/platform-browser';
 import { AppComponent } from './app/app.component';
 import { provideRouter } from '@angular/router';
 import { routes } from './app/app-routing.module';
-import { provideHttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideToastr } from 'ngx-toastr';
-import { AuthInterceptor, AuthInterceptorProvider } from './app/interceptors/auth.interceptor';
+import { AuthInterceptorProvider } from './app/interceptors/auth.interceptor';
+import { withInterceptorsFromDi } from '@angular/common/http';
+
 
 bootstrapApplication(AppComponent, {
   providers: [
     provideRouter(routes),
-    provideHttpClient(),
+    provideHttpClient(withInterceptorsFromDi()),
     provideAnimations(),
+    AuthInterceptorProvider,
     provideToastr({
       timeOut: 4000,
       closeButton: true,
       progressBar: true}),
-      { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
 }).catch(err => console.error(err));
