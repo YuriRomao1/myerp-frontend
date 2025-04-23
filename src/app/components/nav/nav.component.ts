@@ -26,7 +26,8 @@ import { ToastrService } from 'ngx-toastr';
 ]
 })
 export class NavComponent {
-  constructor(private router: Router,
+  constructor(
+    private router: Router,
     private authService: AuthService,
     private toast: ToastrService) {}
 

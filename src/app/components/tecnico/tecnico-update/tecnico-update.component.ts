@@ -11,10 +11,10 @@ import { TecnicoService } from 'src/app/services/tecnico.service';
 import { Tecnico } from 'src/app/model/tecnico';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-tecnico-create',
+  selector: 'app-tecnico-update',
   imports: [
     CommonModule,
     FormsModule,
@@ -26,20 +26,20 @@ import { Router } from '@angular/router';
     MatIconModule,
     MatButtonModule
   ],
-  templateUrl: './tecnico-create.component.html',
-  styleUrls: ['./tecnico-create.component.css']
+  templateUrl: './tecnico-update.component.html',
+  styleUrl: './tecnico-update.component.css'
 })
-export class TecnicoCreateComponent {
+export class TecnicoUpdateComponent {
 
   tecnico: Tecnico = {
-    id:         '',
-    nome:       '',
-    cpf:        '',
-    email:      '',
-    senha:      '',
-    perfis:     [],
-    dataCriacao: ''
-  }
+    id: '',
+    nome: '',
+    cpf: '',
+    email: '',
+    senha: '',
+    perfis: [],
+    dataCriacao: '',
+  };
 
   nome:  FormControl = new FormControl(null, Validators.minLength(3));
   cpf:   FormControl = new FormControl(null, Validators.required);
@@ -49,15 +49,28 @@ export class TecnicoCreateComponent {
   constructor(
     private service: TecnicoService,
     private toast: ToastrService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute,
   ) { }
 
-  create(): void {
-    this.service.create(this.tecnico).subscribe( () => {
-      this.toast.success('Técnico cadastrado com sucesso!', 'Cadastro');
+  ngOnInit(): void {
+    this.tecnico.id = this.route.snapshot.paramMap.get('id');
+    this.findById();
+  }
+
+  findById(): void {
+    this.service.findById(this.tecnico.id).subscribe( resposta => {
+      resposta.perfis = [];
+      this.tecnico = resposta;
+    } )
+  }
+
+  update(): void {
+    this.service.update(this.tecnico).subscribe( () => {
+      this.toast.success('Técnico atualizado com sucesso!', 'Update');
       this.router.navigate(['tecnicos']);
     }, ex => {
-      if(ex.error.errors) {
+      if(ex.error.errors && ex.error.errors ) {
         ex.error.errors.forEach( element => {
           this.toast.error(element.message);
         });

@@ -11,8 +11,6 @@ import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatFormFieldControl } from '@angular/material/form-field';
-
 
 @Component({
   selector: 'app-tecnico',
