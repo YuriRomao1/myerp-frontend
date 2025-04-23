@@ -7,7 +7,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideToastr } from 'ngx-toastr';
 import { AuthInterceptorProvider } from './app/interceptors/auth.interceptor';
 import { withInterceptorsFromDi } from '@angular/common/http';
-
+import { provideNgxMask } from 'ngx-mask';
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -18,6 +18,8 @@ bootstrapApplication(AppComponent, {
     provideToastr({
       timeOut: 4000,
       closeButton: true,
-      progressBar: true}),
+      progressBar: true
+    }),
+    provideNgxMask(),
   ],
 }).catch(err => console.error(err));

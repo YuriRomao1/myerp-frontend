@@ -8,6 +8,10 @@ import { OnInit } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { RouterModule } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatFormFieldControl } from '@angular/material/form-field';
 
 
 @Component({
@@ -21,7 +25,13 @@ import { RouterModule } from '@angular/router';
     MatPaginatorModule,
     MatFormFieldModule,
     MatInputModule,
-    RouterModule
+    RouterModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    MatButtonModule,
+    MatFormFieldModule,
   ],
 })
 export class TecnicoComponent implements OnInit, AfterViewInit {
