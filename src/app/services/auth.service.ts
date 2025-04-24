@@ -22,7 +22,6 @@ export class AuthService {
   }
 
   successfulLogin(authToken: string) {
-    console.log('Token recebido:', authToken);
     localStorage.setItem('token', authToken);
   }
 
