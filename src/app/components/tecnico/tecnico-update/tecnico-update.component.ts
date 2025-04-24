@@ -70,7 +70,7 @@ export class TecnicoUpdateComponent {
       this.toast.success('Técnico atualizado com sucesso!', 'Update');
       this.router.navigate(['tecnicos']);
     }, ex => {
-      if(ex.error.errors && ex.error.errors ) {
+      if(ex.error.errors) {
         ex.error.errors.forEach( element => {
           this.toast.error(element.message);
         });
