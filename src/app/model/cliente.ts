@@ -1,4 +1,4 @@
-export interface Tecnico {
+export interface Cliente {
   id?:         any;
   nome:     string;
   cpf:      string;
@@ -7,6 +7,6 @@ export interface Tecnico {
   perfis: string[];
   dataCriacao: any;
 }
-  export interface TecnicoResponse{
-    tecnico: Tecnico[];
+  export interface ClienteResponse{
+    cliente: Cliente[];
 }
