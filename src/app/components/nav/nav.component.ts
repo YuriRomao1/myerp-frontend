@@ -32,7 +32,7 @@ export class NavComponent {
     private toast: ToastrService) {}
 
   ngOnInit() {
-    this.router.navigate(['tecnicos']);
+    this.router.navigate(['chamados']);
   }
 
   logout() {
