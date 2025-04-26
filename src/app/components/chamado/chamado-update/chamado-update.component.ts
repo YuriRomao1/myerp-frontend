@@ -16,8 +16,7 @@ import { Cliente } from 'src/app/model/cliente';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-chamado-create',
-  standalone: true,
+  selector: 'app-chamado-update',
   imports: [
     FormsModule,
     ReactiveFormsModule,
@@ -28,11 +27,10 @@ import { CommonModule } from '@angular/common';
     RouterModule,
     CommonModule,
   ],
-  templateUrl: './chamado-create.component.html',
-  styleUrls: ['./chamado-create.component.css']
+  templateUrl: './chamado-update.component.html',
+  styleUrl: './chamado-update.component.css'
 })
-export class ChamadoCreateComponent implements OnInit {
-
+export class ChamadoUpdateComponent {
   chamado: Chamado = {
     prioridade:  '',
     status:      '',
@@ -70,13 +68,13 @@ export class ChamadoCreateComponent implements OnInit {
     this.findAllTecnicos();
   }
 
-  create(): void {
-   this.chamadoService.create(this.chamado).subscribe(resposta => {
-      this.toastService.success('Chamado criado com sucesso!', 'Novo chamado');
+  update(): void {
+    this.chamadoService.update(this.chamado).subscribe(resposta => {
+      this.toastService.success('Chamado atualizado com sucesso', 'Atualizar chamado');
       this.router.navigate(['chamados']);
-    }, error => {
-      this.toastService.error(error.error.message, 'Erro ao criar chamado');
-    });
+    }, ex => {
+      this.toastService.error(ex.error.error);
+    })
   }
 
   findAllClientes(): void {
