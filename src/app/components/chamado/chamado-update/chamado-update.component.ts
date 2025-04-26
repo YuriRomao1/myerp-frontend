@@ -5,7 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
-import { RouterModule, Router } from '@angular/router';
+import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ChamadoService } from 'src/app/services/chamado.service';
 import { ClienteService } from 'src/app/services/cliente.service';
@@ -45,8 +45,6 @@ export class ChamadoUpdateComponent {
   clientes: Cliente[] = [];
   tecnicos: Tecnico[] = [];
 
-  filteredTecnicos: Tecnico[] = [];
-
   prioridade: FormControl = new FormControl(null, [Validators.required]);
   status:     FormControl = new FormControl(null, [Validators.required]);
   titulo:     FormControl = new FormControl(null, [Validators.required]);
@@ -59,17 +57,27 @@ export class ChamadoUpdateComponent {
     private clienteService: ClienteService,
     private tecnicoService: TecnicoService,
     private toastService: ToastrService,
-    private router: Router
-
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
+    this.chamado.id = this.route.snapshot.paramMap.get('id');
+    this.findById();
     this.findAllClientes();
     this.findAllTecnicos();
   }
 
+  findById(): void {
+    this.chamadoService.findById(this.chamado.id).subscribe(resposta => {
+      this.chamado = resposta;
+    }, error => {
+      this.toastService.error(error.error.error);
+    })
+  }
+
   update(): void {
-    this.chamadoService.update(this.chamado).subscribe(resposta => {
+    this.chamadoService.update(this.chamado).subscribe( resposta => {
       this.toastService.success('Chamado atualizado com sucesso', 'Atualizar chamado');
       this.router.navigate(['chamados']);
     }, ex => {
@@ -86,12 +94,31 @@ export class ChamadoUpdateComponent {
   findAllTecnicos(): void {
     this.tecnicoService.findAll().subscribe(resposta => {
       this.tecnicos = resposta;
-      this.filteredTecnicos = resposta;
     });
   }
 
   validaCampos(): boolean {
     return this.prioridade.valid && this.status.valid && this.titulo.valid &&
            this.observacoes.valid && this.tecnico.valid && this.cliente.valid;
+  }
+
+  retornaStatus(status: any): string {
+    if(status == '0') {
+      return 'ABERTO'
+    } else if(status == '1') {
+      return 'EM ANDAMENTO'
+    } else {
+      return 'ENCERRADO'
+    }
+  }
+
+  retornaPrioridade(prioridade: any): string {
+    if(prioridade == '0') {
+      return 'BAIXA'
+    } else if(prioridade == '1') {
+      return 'MÉDIA'
+    } else {
+      return 'ALTA'
+    }
   }
 }
