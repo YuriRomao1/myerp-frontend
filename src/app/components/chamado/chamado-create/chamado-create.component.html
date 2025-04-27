@@ -69,11 +69,25 @@
      </mat-form-field>
   </div>
 
+  <!-- Novo campo Valor -->
+  <div class="valor">
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Valor</mat-label>
+      <input
+        matInput
+        type="number"
+        name="valor"
+        [(ngModel)]="chamado.valor"
+        [formControl]="valor"
+        required
+        placeholder="Ex. 1000.00">
+    </mat-form-field>
+  </div>
+
   <form class="form">
     <mat-form-field class="full-width" appearance="outline">
       <mat-label>Deixe uma observação</mat-label>
       <textarea
-
       name="observacoes"
       [formControl]="observacoes"
       required

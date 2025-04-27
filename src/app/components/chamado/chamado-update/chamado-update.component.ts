@@ -40,6 +40,7 @@ export class ChamadoUpdateComponent {
     cliente:     '',
     nomeCliente: '',
     nomeTecnico: '',
+    valor:        0,
   }
 
   clientes: Cliente[] = [];
@@ -51,6 +52,7 @@ export class ChamadoUpdateComponent {
   observacoes:FormControl = new FormControl(null, [Validators.required]);
   tecnico:    FormControl = new FormControl(null, [Validators.required]);
   cliente:    FormControl = new FormControl(null, [Validators.required]);
+valor: FormControl<any>;
 
   constructor(
     private chamadoService: ChamadoService,
@@ -98,8 +100,13 @@ export class ChamadoUpdateComponent {
   }
 
   validaCampos(): boolean {
-    return this.prioridade.valid && this.status.valid && this.titulo.valid &&
-           this.observacoes.valid && this.tecnico.valid && this.cliente.valid;
+    return this.prioridade.valid &&
+           this.status.valid &&
+           this.titulo.valid &&
+           this.observacoes.valid &&
+           this.tecnico.valid &&
+           this.cliente.valid &&
+           this.valor.valid;
   }
 
   retornaStatus(status: any): string {

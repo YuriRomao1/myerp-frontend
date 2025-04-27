@@ -42,6 +42,7 @@ export class ChamadoCreateComponent implements OnInit {
     cliente:     '',
     nomeCliente: '',
     nomeTecnico: '',
+    valor:       0,
   }
 
   clientes: Cliente[] = [];
@@ -55,6 +56,7 @@ export class ChamadoCreateComponent implements OnInit {
   observacoes:FormControl = new FormControl(null, [Validators.required]);
   tecnico:    FormControl = new FormControl(null, [Validators.required]);
   cliente:    FormControl = new FormControl(null, [Validators.required]);
+valor: FormControl<any>;
 
   constructor(
     private chamadoService: ChamadoService,

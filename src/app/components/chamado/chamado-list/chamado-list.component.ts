@@ -38,7 +38,7 @@ export class ChamadoListComponent {
   ELEMENT_DATA: Chamado[] = [];
   FILTERED_DATA: Chamado[] = [];
 
-  displayedColumns: string[] = ['id', 'titulo', 'cliente', 'tecnico', 'dataAbertura','prioridade','status','acoes'];
+  displayedColumns: string[] = ['id', 'titulo', 'cliente', 'tecnico', 'dataAbertura','prioridade','valor','status','acoes'];
   dataSource = new MatTableDataSource<Chamado>(this.ELEMENT_DATA);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -51,7 +51,7 @@ export class ChamadoListComponent {
 
   findAll(): void {
     this.service.findAll().subscribe( resposta => {
-      this.ELEMENT_DATA = resposta;
+      this.ELEMENT_DATA = resposta.slice().reverse();
       this.dataSource = new MatTableDataSource<Chamado>(resposta);
       this.dataSource.paginator = this.paginator;
     });
