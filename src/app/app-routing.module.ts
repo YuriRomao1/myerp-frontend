@@ -15,6 +15,8 @@ import { ChamadoListComponent } from './components/chamado/chamado-list/chamado-
 import { ChamadoCreateComponent } from './components/chamado/chamado-create/chamado-create.component';
 import { ChamadoUpdateComponent } from './components/chamado/chamado-update/chamado-update.component';
 import { ChamadoReadComponent } from './components/chamado/chamado-read/chamado-read.component';
+import { DespesaListComponent } from './components/despesa/despesa-list/despesa-list.component';
+import { DespesaCreateComponent } from './components/despesa/despesa-create/despesa-create.component';
 
 export const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -36,6 +38,9 @@ export const routes: Routes = [
       { path: 'chamados/create',     component: ChamadoCreateComponent },
       { path: 'chamados/update/:id', component: ChamadoUpdateComponent },
       { path: 'chamados/read/:id',   component: ChamadoReadComponent   },
+
+      { path: 'despesas',            component: DespesaListComponent   },
+      { path: 'despesas/create',     component: DespesaCreateComponent },
 
 
     ]
