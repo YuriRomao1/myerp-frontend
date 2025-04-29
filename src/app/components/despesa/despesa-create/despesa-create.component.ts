@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -12,8 +12,11 @@ import { RouterModule, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { DespesaService } from 'src/app/services/despesa.service';
 import { Despesa } from 'src/app/model/despesa';
+import { MatRadioModule } from '@angular/material/radio';
+
 @Component({
   selector: 'app-despesa-create',
+  standalone: true,
   imports: [
     CommonModule,
     FormsModule,
@@ -24,49 +27,64 @@ import { Despesa } from 'src/app/model/despesa';
     MatNativeDateModule,
     MatSelectModule,
     MatButtonModule,
-    RouterModule
+    RouterModule,
+    MatRadioModule
   ],
   templateUrl: './despesa-create.component.html',
-  styleUrl: './despesa-create.component.css'
+  styleUrls: ['./despesa-create.component.css'],
+  providers: [DatePipe]
 })
-export class DespesaCreateComponent {
+export class DespesaCreateComponent implements OnInit {
 
-  despesa: Despesa = {
-    descricao:      '',
-    valor:           0,
-    dataVencimento: '',
-    status:         ''
-  }
-
-  descricao:      FormControl = new FormControl(null, [Validators.required]);
-  valor:          FormControl = new FormControl(null, [Validators.required]);
-  dataVencimento: FormControl = new FormControl(null, [Validators.required]);
-  dataPagamento:  FormControl = new FormControl(null);
-  status:         FormControl = new FormControl(null, [Validators.required]);
+  despesaForm!: FormGroup;
 
   constructor(
+    private fb: FormBuilder,
     private despesaService: DespesaService,
     private toast: ToastrService,
-    private router: Router
-  ) { }
+    private router: Router,
+    private datePipe: DatePipe
+  ) {}
 
-  ngOnInit(): void { }
-
-  create(): void {
-    if (this.validaCampos()) {
-      this.despesaService.create(this.despesa).subscribe(response => {
-        this.toast.success("Despesa criada com sucesso!", "Sucesso");
-        this.router.navigate(["/despesas"]);
-      }, error => {
-        this.toast.error(error.error.message, "Erro ao criar despesa");
-      });
-    }
+  ngOnInit(): void {
+    this.despesaForm = this.fb.group({
+      descricao:      ['', Validators.required],
+      valor:          [null, [Validators.required, Validators.min(0.01)]],
+      dataVencimento: [null, Validators.required],
+      status:         ['', Validators.required]
+    });
   }
 
-  validaCampos(): boolean {
-    return this.descricao.valid &&
-           this.valor.valid &&
-           this.dataVencimento.valid &&
-           this.status.valid;
+  create(): void {
+    if (this.despesaForm.invalid) {
+      this.despesaForm.markAllAsTouched();
+      return;
+    }
+
+    // 1) Pega valores puros do form
+    const { descricao, valor, dataVencimento, status } = this.despesaForm.value;
+
+    // 2) Formata a data para "dd/MM/yyyy"
+    const dataFormatada = this.datePipe.transform(dataVencimento, 'dd/MM/yyyy');
+
+    // 3) Monta o payload final que o backend espera
+    const payload: Despesa = {
+      descricao,
+      valor,
+      dataVencimento: dataFormatada ?? '',
+      status
+    };
+
+    // 4) Chama o serviço
+    this.despesaService.create(payload).subscribe(
+      () => {
+        this.toast.success('Despesa criada com sucesso!', 'Sucesso');
+        this.router.navigate(['/despesas']);
+      },
+      err => {
+        const msg = err.error?.message ?? err.message;
+        this.toast.error(msg, 'Erro ao criar despesa');
+      }
+    );
   }
 }

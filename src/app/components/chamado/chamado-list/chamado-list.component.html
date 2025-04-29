@@ -5,8 +5,7 @@
     routerLink="create"
     class="fullWidth mat-elevation-z8"
     mat-stroked-button
-    color="primary"
-  >
+    color="primary">
     Novo Chamado
   </button>
 
@@ -21,15 +20,15 @@
   </mat-form-field>
 
   <mat-radio-group color="primary">
-    <mat-radio-button (click)="orderByStatus(0)" value="0"
-      >ABERTO</mat-radio-button
-    >
-    <mat-radio-button (click)="orderByStatus(1)" value="1"
-      >ANDAMENTO</mat-radio-button
-    >
-    <mat-radio-button (click)="orderByStatus(2)" value="2"
-      >ENCERRADO</mat-radio-button
-    >
+    <mat-radio-button (click)="orderByStatus(0)" value="0">
+      ABERTO
+    </mat-radio-button>
+    <mat-radio-button (click)="orderByStatus(1)" value="1">
+      ANDAMENTO
+    </mat-radio-button>
+    <mat-radio-button (click)="orderByStatus(2)" value="2">
+      ENCERRADO
+    </mat-radio-button>
   </mat-radio-group>
 
   <div class="mat-elevation-z8">
@@ -75,11 +74,8 @@
 
       <ng-container matColumnDef="valor">
         <th mat-header-cell *matHeaderCellDef>Valor</th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.valor }} R$
-        </td>
+        <td mat-cell *matCellDef="let element">{{ element.valor }} R$</td>
       </ng-container>
-
 
       <ng-container matColumnDef="acoes">
         <th mat-header-cell *matHeaderCellDef>Ações</th>
@@ -100,8 +96,7 @@
     <mat-paginator
       [pageSizeOptions]="[2, 5, 10, 20, 50, 100]"
       [pageSize]="5"
-      showFirstLastButtons
-    >
+      showFirstLastButtons>
     </mat-paginator>
   </div>
 </div>

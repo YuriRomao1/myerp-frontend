@@ -67,4 +67,10 @@ export class DespesaListComponent {
     }
     return status;
   }
+
+  orderByDespesaStatus(status: string): void {
+    const filtered = this.ELEMENT_DATA.filter(despesa => despesa.status === status);
+    this.dataSource = new MatTableDataSource<Despesa>(filtered);
+    this.dataSource.paginator = this.paginator;
+  }
 }
