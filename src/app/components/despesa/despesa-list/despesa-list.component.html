@@ -14,6 +14,18 @@
     <input matInput (keyup)="applyFilter($event)" placeholder="Ex. lavanderia" #input>
   </mat-form-field>
 
+  <mat-radio-group color="primary">
+    <mat-radio-button (click)="orderByStatus('PENDENTE')" value="PENDENTE">
+      PENDENTE
+    </mat-radio-button>
+    <mat-radio-button (click)="orderByStatus('PAGO')" value="PAGO">
+      PAGO
+    </mat-radio-button>
+    <mat-radio-button (click)="orderByStatus('ATRASADO')" value="ATRASADO">
+      ATRASADO
+    </mat-radio-button>
+  </mat-radio-group>
+
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource">
 

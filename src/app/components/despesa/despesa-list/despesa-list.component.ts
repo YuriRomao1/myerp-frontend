@@ -5,14 +5,18 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { RouterModule, Router } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { DespesaService } from 'src/app/services/despesa.service';
-import { Despesa } from 'src/app/model/despesa'; // Certifique-se de definir seu modelo de despesa
-
+import { Despesa } from 'src/app/model/despesa';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-despesa-list',
+  standalone: true,
   imports: [
     CommonModule,
     MatTableModule,
@@ -20,34 +24,32 @@ import { Despesa } from 'src/app/model/despesa'; // Certifique-se de definir seu
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    RouterModule
+    RouterModule,
+    MatCheckboxModule,
+    MatIconModule,
+    MatRadioModule,
+    MatSelectModule
   ],
   templateUrl: './despesa-list.component.html',
-  styleUrl: './despesa-list.component.css'
+  styleUrls: ['./despesa-list.component.css']
 })
-export class DespesaListComponent {
-
+export class DespesaListComponent implements OnInit {
   ELEMENT_DATA: Despesa[] = [];
-
   dataSource = new MatTableDataSource<Despesa>(this.ELEMENT_DATA);
   displayedColumns: string[] = ['id', 'descricao', 'valor', 'dataVencimento', 'status', 'acoes'];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(
-    private despesaService: DespesaService,
-    private toast: ToastrService,
-    private router: Router
-  ) {}
+  constructor(private service: DespesaService) {}
 
   ngOnInit(): void {
     this.findAll();
   }
 
   findAll(): void {
-    this.despesaService.findAll().subscribe(resposta => {
+    this.service.findAll().subscribe(resposta => {
       this.ELEMENT_DATA = resposta;
-      this.dataSource = new MatTableDataSource<Despesa>(this.ELEMENT_DATA);
+      this.dataSource = new MatTableDataSource<Despesa>(resposta);
       this.dataSource.paginator = this.paginator;
     });
   }
@@ -57,20 +59,21 @@ export class DespesaListComponent {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  retornaStatus(status: any): string {
-    if(status === 'PENDENTE') {
-      return 'Pendente';
-    } else if(status === 'PAGO') {
-      return 'Pago';
-    } else if(status === 'ATRASADO') {
-      return 'Atrasado';
+  retornaStatus(status: string): string {
+    if (status === 'PENDENTE') {
+      return 'PENDENTE';
+    } else if (status === 'PAGO') {
+      return 'PAGO';
+    } else if (status === 'ATRASADO'){
+      return 'ATRASADO';
+    } else {
+      return 'DESCONHECIDO';
     }
-    return status;
   }
 
-  orderByDespesaStatus(status: string): void {
-    const filtered = this.ELEMENT_DATA.filter(despesa => despesa.status === status);
-    this.dataSource = new MatTableDataSource<Despesa>(filtered);
+  orderByStatus(status: string): void {
+    const list = this.ELEMENT_DATA.filter(element => element.status === status);
+    this.dataSource = new MatTableDataSource<Despesa>(list);
     this.dataSource.paginator = this.paginator;
   }
 }

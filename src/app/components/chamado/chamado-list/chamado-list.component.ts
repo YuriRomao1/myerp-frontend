@@ -29,7 +29,6 @@ import { ChamadoService } from 'src/app/services/chamado.service';
     MatFormFieldModule,
     MatRadioModule,
   ],
-
   templateUrl: './chamado-list.component.html',
   styleUrl: './chamado-list.component.css'
 })
@@ -45,9 +44,7 @@ export class ChamadoListComponent {
 
   constructor(private service: ChamadoService) { }
 
-  ngOnInit(): void {
-    this.findAll();
-  }
+  ngOnInit(): void { this.findAll(); }
 
   findAll(): void {
     this.service.findAll().subscribe( resposta => {
