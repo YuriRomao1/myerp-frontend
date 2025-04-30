@@ -1,5 +1,5 @@
 <div class="container mat-elevation-z8">
-  <h1 class="title">Criando Despesa</h1>
+  <h1 class="title">Atualizando Despesa</h1>
   <img src="/assets/img/chamado-create.svg" alt="Despesa" class="img-despesa" />
 
   <form [formGroup]="despesaForm" class="form">
@@ -57,17 +57,16 @@
 
     <button
       type="button"
-      (click)="create()"
+      (click)="update()"
       [disabled]="despesaForm.invalid"
       class="full-width mat-elevation-z4"
       mat-raised-button
-      color="primary"
-    >
-      Adicionar
+      color="primary">
+      Atualizar
     </button>
     <button
       type="button"
-      routerLink="../"
+      routerLink="../../"
       class="full-width mat-elevation-z4"
       mat-stroked-button
       color="warn"

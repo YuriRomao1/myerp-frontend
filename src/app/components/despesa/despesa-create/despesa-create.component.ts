@@ -60,14 +60,8 @@ export class DespesaCreateComponent implements OnInit {
       this.despesaForm.markAllAsTouched();
       return;
     }
-
-    // 1) Pega valores puros do form
     const { descricao, valor, dataVencimento, status } = this.despesaForm.value;
-
-    // 2) Formata a data para "dd/MM/yyyy"
     const dataFormatada = this.datePipe.transform(dataVencimento, 'dd/MM/yyyy');
-
-    // 3) Monta o payload final que o backend espera
     const payload: Despesa = {
       descricao,
       valor,
@@ -75,7 +69,6 @@ export class DespesaCreateComponent implements OnInit {
       status
     };
 
-    // 4) Chama o serviço
     this.despesaService.create(payload).subscribe(
       () => {
         this.toast.success('Despesa criada com sucesso!', 'Sucesso');

@@ -1,5 +1,5 @@
 export interface Despesa {
-  id?:            number;
+  id?:               any;
   descricao:      string;
   valor:          number;
   dataVencimento: string;
