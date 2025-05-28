@@ -33,9 +33,10 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
   ],
 })
 export class TecnicoComponent implements OnInit, AfterViewInit {
+
   ELEMENT_DATA: Tecnico[] = []
 
-  displayedColumns: string[] = ['id', 'nome', 'cpf', 'email','acoes'];
+  displayedColumns: string[] = ['id', 'nome', 'cpf', 'telefone', 'endereco', 'dataNascimento', 'email', 'acoes'];
   dataSource = new MatTableDataSource<Tecnico>(this.ELEMENT_DATA);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;

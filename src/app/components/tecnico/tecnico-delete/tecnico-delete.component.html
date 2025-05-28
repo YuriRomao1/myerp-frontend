@@ -28,7 +28,37 @@
         name="cpf"
         [disabled]="true"
         matInput >
-        <mat-icon matSuffix>pin </mat-icon>
+        <mat-icon matSuffix>pin</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field class="fullWidth" appearance="fill">
+        <mat-label>Telefone</mat-label>
+        <input
+        [(ngModel)]="tecnico.telefone"
+        name="telefone"
+        [disabled]="true"
+        matInput >
+        <mat-icon matSuffix>phone</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field class="fullWidth" appearance="fill">
+        <mat-label>Endereço</mat-label>
+        <input
+        [(ngModel)]="tecnico.endereco"
+        name="endereco"
+        [disabled]="true"
+        matInput >
+        <mat-icon matSuffix>home</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field class="fullWidth" appearance="fill">
+        <mat-label>Data de Nascimento</mat-label>
+        <input
+        [(ngModel)]="tecnico.dataNascimento"
+        name="dataNascimento"
+        [disabled]="true"
+        matInput >
+        <mat-icon matSuffix>calendar_today</mat-icon>
       </mat-form-field>
 
       <mat-form-field class="fullWidth" appearance="fill">
