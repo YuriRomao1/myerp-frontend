@@ -1,9 +1,10 @@
 export interface Cliente {
-  id?:         any;
-  nome:     string;
-  cpf:      string;
-  email:    string;
-  senha:    string;
+  id?: any;
+  nome: string;
+  cpf: string;
+  email: string;
+  telefone: string;
+  endereco: string;
   perfis: string[];
   dataCriacao: any;
 }

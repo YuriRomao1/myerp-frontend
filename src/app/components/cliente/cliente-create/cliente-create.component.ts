@@ -11,6 +11,7 @@ import { ClienteService } from 'src/app/services/cliente.service';
 import { Cliente } from 'src/app/model/cliente';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 @Component({
@@ -24,7 +25,8 @@ import { Router } from '@angular/router';
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatNativeDateModule
   ],
   templateUrl: './cliente-create.component.html',
   styleUrls: ['./cliente-create.component.css']
@@ -32,19 +34,22 @@ import { Router } from '@angular/router';
 export class ClienteCreateComponent {
 
   cliente: Cliente = {
-    id:         '',
-    nome:       '',
-    cpf:        '',
-    email:      '',
-    senha:      '',
-    perfis:     [],
-    dataCriacao: ''
-  }
+    id: '',
+    nome: '',
+    cpf: '',
+    email: '',
+    telefone: '',
+    endereco: '',
+    perfis: [],
+    dataCriacao: '',
+  };
 
   nome:  FormControl = new FormControl(null, Validators.minLength(3));
   cpf:   FormControl = new FormControl(null, Validators.required);
   email: FormControl = new FormControl(null, Validators.email);
-  senha: FormControl = new FormControl(null, Validators.minLength(3));
+  telefone: FormControl = new FormControl(null, [Validators.required, Validators.maxLength(15)]);
+  endereco: FormControl = new FormControl(null, [Validators.required, Validators.maxLength(255)]);
+
 
   constructor(
     private service: ClienteService,
@@ -67,6 +72,10 @@ export class ClienteCreateComponent {
     })
   }
 
+    ngOnInit(): void {
+    this.cliente.perfis.push('1');
+  }
+
   addPerfil(perfil: any): void {
     if(this.cliente.perfis.includes(perfil)) {
       this.cliente.perfis.splice(this.cliente.perfis.indexOf(perfil), 1);
@@ -76,6 +85,6 @@ export class ClienteCreateComponent {
   }
 
   validaCampos(): boolean {
-    return this.nome.valid && this.cpf.valid && this.email.valid && this.senha.valid;
+    return this.nome.valid && this.cpf.valid && this.email.valid;
   }
 }

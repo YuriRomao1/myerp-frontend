@@ -18,11 +18,6 @@ img {
   margin: auto;
 }
 
-.section {
-  margin-bottom: 1rem;
-  display: flex;
-  justify-content: space-between;
-}
 
 button {
   margin-top: .5rem;
@@ -36,3 +31,8 @@ p {
 mat-icon {
   opacity: .8;
 }
+
+mat-form-field {
+    margin-bottom: 1rem;
+}
+

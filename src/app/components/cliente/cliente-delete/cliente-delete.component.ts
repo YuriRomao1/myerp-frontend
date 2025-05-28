@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
@@ -20,15 +19,14 @@ import { ActivatedRoute } from '@angular/router';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    MatCheckboxModule,
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
-    MatButtonModule],
+    MatButtonModule
+  ],
   templateUrl: './cliente-delete.component.html',
   styleUrl: './cliente-delete.component.css'
 })
-
 export class ClienteDeleteComponent {
 
   cliente: Cliente = {
@@ -36,7 +34,8 @@ export class ClienteDeleteComponent {
     nome: '',
     cpf: '',
     email: '',
-    senha: '',
+    telefone: '',
+    endereco: '',
     perfis: [],
     dataCriacao: '',
   };
@@ -54,26 +53,26 @@ export class ClienteDeleteComponent {
   }
 
   findById(): void {
-    this.service.findById(this.cliente.id).subscribe( resposta => {
-      resposta.perfis = [];
+    this.service.findById(this.cliente.id).subscribe(resposta => {
+      resposta.perfis = ['1'];
       this.cliente = resposta;
-    } )
+    })
   }
 
   delete(): void {
     this.service.delete(this.cliente.id).subscribe(() => {
-        this.toast.success('Cliente deletado com sucesso', 'Delete');
-        this.router.navigate(['clientes'])
+      this.toast.success('Cliente deletado com sucesso', 'Delete');
+      this.router.navigate(['clientes'])
     }, ex => {
-        if (ex.error && ex.error.errors) {
-            ex.error.errors.forEach(element => {
-                this.toast.error(element.message);
-            });
-        } else if (ex.error && ex.error.message) {
-            this.toast.error(ex.error.message);
-        } else {
-            this.toast.error('Cliente possui ordens de serviço e não pode ser deletado!');
-        }
+      if (ex.error && ex.error.errors) {
+        ex.error.errors.forEach(element => {
+          this.toast.error(element.message);
+        });
+      } else if (ex.error && ex.error.message) {
+        this.toast.error(ex.error.message);
+      } else {
+        this.toast.error('Cliente possui ordens de serviço e não pode ser deletado!');
+      }
     })
-}
+  }
 }

@@ -30,13 +30,15 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './cliente-update.component.css'
 })
 export class ClienteUpdateComponent {
+  [x: string]: any;
 
   cliente: Cliente = {
     id: '',
     nome: '',
     cpf: '',
     email: '',
-    senha: '',
+    telefone: '',
+    endereco: '',
     perfis: [],
     dataCriacao: '',
   };
@@ -44,7 +46,9 @@ export class ClienteUpdateComponent {
   nome:  FormControl = new FormControl(null, Validators.minLength(3));
   cpf:   FormControl = new FormControl(null, Validators.required);
   email: FormControl = new FormControl(null, Validators.email);
-  senha: FormControl = new FormControl(null, Validators.minLength(3));
+  telefone: FormControl = new FormControl(null, Validators.required);
+  endereco: FormControl = new FormControl(null, Validators.required);
+
 
   constructor(
     private service: ClienteService,
@@ -60,7 +64,7 @@ export class ClienteUpdateComponent {
 
   findById(): void {
     this.service.findById(this.cliente.id).subscribe( resposta => {
-      resposta.perfis = [];
+      resposta.perfis = ['1'];
       this.cliente = resposta;
     } )
   }
@@ -89,6 +93,6 @@ export class ClienteUpdateComponent {
   }
 
   validaCampos(): boolean {
-    return this.nome.valid && this.cpf.valid && this.email.valid && this.senha.valid;
+    return this.nome.valid && this.cpf.valid && this.email.valid;
   }
 }
