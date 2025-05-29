@@ -18,6 +18,7 @@ import { ChamadoReadComponent } from './components/chamado/chamado-read/chamado-
 import { DespesaListComponent } from './components/despesa/despesa-list/despesa-list.component';
 import { DespesaCreateComponent } from './components/despesa/despesa-create/despesa-create.component';
 import { DespesaUpdateComponent } from './components/despesa/despesa-update/despesa-update.component';
+import { EmpresaListComponent } from './components/empresa/empresa-list/empresa-list.component';
 
 export const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -44,6 +45,7 @@ export const routes: Routes = [
       { path: 'despesas/create',     component: DespesaCreateComponent },
       { path: 'despesas/update/:id', component: DespesaUpdateComponent },
 
+      { path: 'empresas',             component: EmpresaListComponent    },
 
     ]
   }

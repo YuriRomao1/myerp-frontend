@@ -1,1 +1,71 @@
-<p>empresa-list works!</p>
+<div class="container mat-elevation-z8">
+  <form class="form">
+  <h1  class="fullWidth">Listando Empresas</h1>
+
+  <button routerLink="create" class="fullWidth mat-elevation-z" mat-stroked-button color="primary">Nova empresa</button>
+
+  <mat-form-field appearance="fill">
+     <mat-label>Filter</mat-label>
+     <input matInput (keyup)="applyFilter($event)" placeholder="Ex. nome fantasia" #input>
+   </mat-form-field>
+
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource">
+
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> Id </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="razaoSocial">
+        <th mat-header-cell *matHeaderCellDef> Razão Social </th>
+        <td mat-cell *matCellDef="let element"> {{element.razaoSocial}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="nomeFantasia">
+        <th mat-header-cell *matHeaderCellDef> Nome Fantasia </th>
+        <td mat-cell *matCellDef="let element"> {{element.nomeFantasia}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="cnpj">
+        <th mat-header-cell *matHeaderCellDef> CNPJ </th>
+        <td mat-cell *matCellDef="let element"> {{element.cnpj}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef> Email </th>
+        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="telefone">
+        <th mat-header-cell *matHeaderCellDef> Telefone </th>
+        <td mat-cell *matCellDef="let element"> {{element.telefone}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="dataCriacao">
+        <th mat-header-cell *matHeaderCellDef> Data Criação </th>
+        <td mat-cell *matCellDef="let element"> {{element.dataCriacao}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="acoes">
+        <th mat-header-cell *matHeaderCellDef> Ações </th>
+        <td mat-cell *matCellDef="let element">
+           <a routerLink="update/{{element.id}}">
+              <i class="material-icons edit">edit</i>
+           </a>
+           <a routerLink="delete/{{element.id}}">
+            <i class="material-icons delete">delete</i>
+           </a>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator
+    [pageSizeOptions]="[5, 2, 10, 20, 50, 100]"
+    showFirstLastButtons>
+  </mat-paginator>
+
+</div>
