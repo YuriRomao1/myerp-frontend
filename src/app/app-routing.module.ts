@@ -19,6 +19,9 @@ import { DespesaListComponent } from './components/despesa/despesa-list/despesa-
 import { DespesaCreateComponent } from './components/despesa/despesa-create/despesa-create.component';
 import { DespesaUpdateComponent } from './components/despesa/despesa-update/despesa-update.component';
 import { EmpresaListComponent } from './components/empresa/empresa-list/empresa-list.component';
+import { EmpresaCreateComponent } from './components/empresa/empresa-create/empresa-create.component';
+import { EmpresaUpdateComponent } from './components/empresa/empresa-update/empresa-update.component';
+import { EmpresaDeleteComponent } from './components/empresa/empresa-delete/empresa-delete.component';
 
 export const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -46,7 +49,9 @@ export const routes: Routes = [
       { path: 'despesas/update/:id', component: DespesaUpdateComponent },
 
       { path: 'empresas',             component: EmpresaListComponent    },
-
+      { path: 'empresas/create',      component: EmpresaCreateComponent  },
+      { path: 'empresas/update/:id',  component: EmpresaUpdateComponent  },
+      { path: 'empresas/delete/:id',  component: EmpresaDeleteComponent  },
     ]
   }
 ];
