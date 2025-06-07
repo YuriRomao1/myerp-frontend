@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -27,8 +27,7 @@ import { Router, ActivatedRoute } from '@angular/router';
   templateUrl: './empresa-update.component.html',
   styleUrls: ['./empresa-update.component.css']
 })
-export class EmpresaUpdateComponent {
-
+export class EmpresaUpdateComponent implements OnInit {
   empresa: Empresa = {
     id: '',
     razaoSocial: '',
