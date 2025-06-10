@@ -1,0 +1,38 @@
+.container {
+  width: 35rem;
+  margin: auto;
+  padding: 1rem;
+  border-radius: .6rem;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+h1 {
+  text-align: center;
+}
+
+img {
+  height: 12rem;
+  margin: auto;
+}
+
+.section {
+  margin: 1rem 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  margin-top: .5rem;
+}
+
+p {
+  margin-top: 1rem;
+  opacity: .5;
+}
+
+mat-card {
+  background-color: rgb(235, 235, 235);
+}
