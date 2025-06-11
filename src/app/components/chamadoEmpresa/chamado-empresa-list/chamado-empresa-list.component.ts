@@ -14,7 +14,6 @@ import { ChamadoEmpresaService } from '../../../services/chamadoEmpresa.service'
 
 @Component({
   selector: 'app-chamado-empresa-list',
-  standalone: true,
   imports: [
     CommonModule,
     MatTableModule,

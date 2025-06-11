@@ -1,0 +1,63 @@
+.container {
+  width: 45%;
+  margin: auto auto 3rem auto;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.status-prioridade {
+  display: flex;
+  justify-content: space-between;
+}
+
+.status-prioridade mat-form-field {
+  width: 49%;
+}
+
+.observacoes {
+  min-height: 6rem;
+  max-height: 10rem;
+}
+
+button {
+  margin-top: .5rem;
+}
+
+h1 {
+  text-align: center;
+}
+
+img {
+  height: 15rem;
+  margin: auto;
+}
+
+.tecnico {
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.empresa {
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.valor {
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.dataVisita {
+  width: 100%;
+  margin: 1rem 0;
+}
+
+p {
+  text-align: center;
+  margin-top: 1rem;
+  opacity: .5;
+}
