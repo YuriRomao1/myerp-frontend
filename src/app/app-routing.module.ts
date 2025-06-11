@@ -22,6 +22,10 @@ import { EmpresaListComponent } from './components/empresa/empresa-list/empresa-
 import { EmpresaCreateComponent } from './components/empresa/empresa-create/empresa-create.component';
 import { EmpresaUpdateComponent } from './components/empresa/empresa-update/empresa-update.component';
 import { EmpresaDeleteComponent } from './components/empresa/empresa-delete/empresa-delete.component';
+import { ChamadoEmpresaListComponent } from './components/chamadoEmpresa/chamado-empresa-list/chamado-empresa-list.component';
+//import { ChamadoEmpresaCreateComponent } from './components/chamadoEmpresa/chamado-empresa-create/chamado-empresa-create.component';
+//import { ChamadoEmpresaUpdateComponent } from './components/chamadoEmpresa/chamado-empresa-update/chamado-empresa-update.component';
+//import { ChamadoEmpresaReadComponent } from './components/chamadoEmpresa/chamado-empresa-read/chamado-empresa-read.component';
 
 export const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -52,7 +56,12 @@ export const routes: Routes = [
       { path: 'empresas/create',      component: EmpresaCreateComponent  },
       { path: 'empresas/update/:id',  component: EmpresaUpdateComponent  },
       { path: 'empresas/delete/:id',  component: EmpresaDeleteComponent  },
-    ]
+
+      { path: 'chamadosEmpresa',            component: ChamadoEmpresaListComponent    },
+//      { path: 'chamadosEmpresa/create',     component: ChamadoEmpresaCreateComponent  },
+//      { path: 'chamadosEmpresa/update/:id', component: ChamadoEmpresaUpdateComponent  },
+//      { path: 'chamadosEmpresa/read/:id',   component: ChamadoEmpresaReadComponent    },
+  ]
   }
 ];
 export class AppRoutingModule { }

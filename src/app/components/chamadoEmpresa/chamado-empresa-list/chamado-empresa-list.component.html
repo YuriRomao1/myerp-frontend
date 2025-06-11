@@ -1,38 +1,24 @@
 <div class="container">
-  <h1>Lista de Chamado para cliente</h1>
+  <h1>Lista de Chamados para Empresas</h1>
 
-  <button
-    routerLink="create"
-    class="fullWidth mat-elevation-z8"
-    mat-stroked-button
-    color="primary">
+  <button routerLink="create" class="fullWidth mat-elevation-z8" mat-stroked-button color="primary">
     Novo Chamado
   </button>
 
   <mat-form-field appearance="fill">
     <mat-label>Filter</mat-label>
-    <input
-      matInput
-      (keyup)="applyFilter($event)"
-      placeholder="Ex. ium"
-      #input
-    />
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
   </mat-form-field>
 
   <mat-radio-group color="primary">
-    <mat-radio-button (click)="orderByStatus(0)" value="0">
-      ABERTO
-    </mat-radio-button>
-    <mat-radio-button (click)="orderByStatus(1)" value="1">
-      ANDAMENTO
-    </mat-radio-button>
-    <mat-radio-button (click)="orderByStatus(2)" value="2">
-      ENCERRADO
-    </mat-radio-button>
+    <mat-radio-button (click)="orderByStatus(0)" value="0">ABERTO</mat-radio-button>
+    <mat-radio-button (click)="orderByStatus(1)" value="1">ANDAMENTO</mat-radio-button>
+    <mat-radio-button (click)="orderByStatus(2)" value="2">ENCERRADO</mat-radio-button>
   </mat-radio-group>
 
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource">
+
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef>ID</th>
         <td mat-cell *matCellDef="let element">{{ element.id }}</td>
@@ -43,9 +29,9 @@
         <td mat-cell *matCellDef="let element">{{ element.titulo }}</td>
       </ng-container>
 
-      <ng-container matColumnDef="cliente">
-        <th mat-header-cell *matHeaderCellDef>Cliente</th>
-        <td mat-cell *matCellDef="let element">{{ element.nomeCliente }}</td>
+      <ng-container matColumnDef="empresa">
+        <th mat-header-cell *matHeaderCellDef>Empresa</th>
+        <td mat-cell *matCellDef="let element">{{ element.nomeEmpresa }}</td>
       </ng-container>
 
       <ng-container matColumnDef="tecnico">
@@ -60,27 +46,27 @@
 
       <ng-container matColumnDef="dataFechamento">
         <th mat-header-cell *matHeaderCellDef>Data de Fechamento</th>
-        <td mat-cell *matCellDef="let element">{{ element.dataFechamento ? element.dataFechamento : '-' }}
-        </td>
+        <td mat-cell *matCellDef="let element">{{ element.dataFechamento ? element.dataFechamento : '-' }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="dataVisita">
+        <th mat-header-cell *matHeaderCellDef>Data da Visita</th>
+        <td mat-cell *matCellDef="let element">{{ element.dataVisita ? element.dataVisita : '-' }}</td>
       </ng-container>
 
       <ng-container matColumnDef="prioridade">
         <th mat-header-cell *matHeaderCellDef>Prioridade</th>
-        <td mat-cell *matCellDef="let element">
-          {{ retornaPrioridade(element.prioridade) }}
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="status">
-        <th mat-header-cell *matHeaderCellDef>Status</th>
-        <td mat-cell *matCellDef="let element">
-          {{ retornaStatus(element.status) }}
-        </td>
+        <td mat-cell *matCellDef="let element">{{ retornaPrioridade(element.prioridade) }}</td>
       </ng-container>
 
       <ng-container matColumnDef="valor">
         <th mat-header-cell *matHeaderCellDef>Valor</th>
         <td mat-cell *matCellDef="let element">{{ element.valor }} R$</td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let element">{{ retornaStatus(element.status) }}</td>
       </ng-container>
 
       <ng-container matColumnDef="acoes">
@@ -99,10 +85,6 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
 
-    <mat-paginator
-      [pageSizeOptions]="[2, 5, 10, 20, 50, 100]"
-      [pageSize]="5"
-      showFirstLastButtons>
-    </mat-paginator>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20, 50, 100]" showFirstLastButtons></mat-paginator>
   </div>
 </div>
