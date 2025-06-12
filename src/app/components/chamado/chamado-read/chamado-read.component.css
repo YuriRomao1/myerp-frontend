@@ -26,6 +26,11 @@ img {
   width: 49%;
 }
 
+.valor {
+  padding-top: .8rem;
+  padding-bottom: .8rem;
+}
+
 .observacoes {
   min-height: 6rem;
   max-height: 10rem;

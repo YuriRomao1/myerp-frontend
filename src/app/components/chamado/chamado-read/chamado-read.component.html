@@ -64,6 +64,19 @@
       </mat-form-field>
    </div>
 
+   <div class="valor">
+     <mat-form-field class="full-width" appearance="outline">
+       <mat-label>Valor {{ chamado.valor }} R$</mat-label>
+       <input
+         matInput
+         [disabled]="true"
+         [(ngModel)]="chamado.valor"
+         name="valor"
+         type="number"
+         placeholder="Ex. 1000.00">
+     </mat-form-field>
+   </div>
+
    <form class="form">
      <mat-form-field class="full-width" appearance="outline">
        <mat-label>Deixe uma observação</mat-label>
@@ -79,5 +92,5 @@
 
    <button routerLink="../../" class="full-width mat-elevation-z4" mat-stroked-button color="warn">Retornar</button>
 
-   <p class="full-width">Desnvolvido por Valdir Cezar</p>
+   <p class="full-width">Desnvolvido por Yuri Romão</p>
 </div>

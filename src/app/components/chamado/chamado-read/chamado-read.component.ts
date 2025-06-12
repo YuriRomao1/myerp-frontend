@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -28,10 +28,9 @@ import { CommonModule } from '@angular/common';
     CommonModule,
   ],
   templateUrl: './chamado-read.component.html',
-  styleUrl: './chamado-read.component.css'
+  styleUrls: ['./chamado-read.component.css']
 })
-export class ChamadoReadComponent {
-
+export class ChamadoReadComponent implements OnInit {
   chamado: Chamado = {
     prioridade:  '',
     status:      '',
@@ -41,7 +40,18 @@ export class ChamadoReadComponent {
     cliente:     '',
     nomeCliente: '',
     nomeTecnico: '',
+    valor:       0
   }
+
+  formChamado = new FormGroup({
+    prioridade:  new FormControl({ value: '', disabled: true }),
+    status:      new FormControl({ value: '', disabled: true }),
+    titulo:      new FormControl({ value: '', disabled: true }),
+    observacoes: new FormControl({ value: '', disabled: true }),
+    tecnico:     new FormControl({ value: '', disabled: true }),
+    cliente:     new FormControl({ value: '', disabled: true }),
+    valor:       new FormControl({ value: 0, disabled: true })
+  });
 
   constructor(
     private chamadoService: ChamadoService,
@@ -57,12 +67,13 @@ export class ChamadoReadComponent {
   findById(): void {
     this.chamadoService.findById(this.chamado.id).subscribe(resposta => {
       this.chamado = resposta;
+      this.formChamado.patchValue(resposta);
     }, ex => {
       this.toastService.error(ex.error.error);
     })
   }
 
-  retornaStatus(status: any): string {
+  retornaStatus(status: string): string {
     if(status == '0') {
       return 'ABERTO'
     } else if(status == '1') {
@@ -72,7 +83,7 @@ export class ChamadoReadComponent {
     }
   }
 
-  retornaPrioridade(prioridade: any): string {
+  retornaPrioridade(prioridade: string): string {
     if(prioridade == '0') {
       return 'BAIXA'
     } else if(prioridade == '1') {
@@ -81,5 +92,4 @@ export class ChamadoReadComponent {
       return 'ALTA'
     }
   }
-
 }
