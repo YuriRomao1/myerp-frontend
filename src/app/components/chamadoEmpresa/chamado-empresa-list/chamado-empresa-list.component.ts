@@ -41,14 +41,11 @@ export class ChamadoEmpresaListComponent implements OnInit {
 
   constructor(private service: ChamadoEmpresaService) { }
 
-  ngOnInit(): void { this.findAll(); }
-
-  findAll(): void {
+  ngOnInit(): void { this.findAll(); }  findAll(): void {
     this.service.findAll().subscribe(resposta => {
       this.ELEMENT_DATA = resposta.slice().reverse();
       this.dataSource = new MatTableDataSource<ChamadoEmpresa>(resposta);
       this.dataSource.paginator = this.paginator;
-
     });
   }
 
@@ -65,15 +62,14 @@ export class ChamadoEmpresaListComponent implements OnInit {
     } else {
       return 'ENCERRADO'
     }
-  }
-
-  retornaPrioridade(prioridade: any): string {
-    if(prioridade == '0') {
-      return 'BAIXA'
-    } else if(prioridade == '1') {
-      return 'MÉDIA'
-    } else {
-      return 'ALTA'
+  }  retornaPrioridade(prioridade: any): string {
+    // Como já está vindo o valor correto da API, apenas retornamos formatado
+    const prioridadeStr = String(prioridade).trim().toUpperCase();
+    switch(prioridadeStr) {
+      case 'BAIXA': return 'BAIXA';
+      case 'MEDIA': return 'MÉDIA';
+      case 'ALTA': return 'ALTA';
+      default: return prioridadeStr;
     }
   }
 

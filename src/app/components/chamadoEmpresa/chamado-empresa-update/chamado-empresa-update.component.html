@@ -1,0 +1,96 @@
+<div class="container mat-elevation-z8">
+  <h1 class="title">Atualizar Chamado para Empresa</h1>
+  <img src="/assets/img/chamado-create.svg" alt="Chamado Empresa" class="img-chamado" />
+
+  <form class="form" [formGroup]="formChamado">
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Título do chamado</mat-label>
+      <input
+        matInput
+        formControlName="titulo"
+        required
+        placeholder="Ex. Instalação do Ar-Condicionado 18000 Btus">
+    </mat-form-field>
+
+    <div class="status-prioridade">
+      <mat-form-field appearance="outline">
+        <mat-label>STATUS ({{ retornaStatus(chamadoEmpresa.status) }})</mat-label>
+        <mat-select
+          formControlName="status"
+          required>
+          <mat-option value="0">ABERTO</mat-option>
+          <mat-option value="1">EM ANDAMENTO</mat-option>
+          <mat-option value="2">ENCERRADO</mat-option>
+        </mat-select>
+      </mat-form-field>      <mat-form-field appearance="outline">
+        <mat-label>PRIORIDADE ({{ retornaPrioridade(chamadoEmpresa.prioridade) }})</mat-label>
+        <mat-select
+          formControlName="prioridade"
+          required>
+          <mat-option value="BAIXA">BAIXA</mat-option>
+          <mat-option value="MEDIA">MÉDIA</mat-option>
+          <mat-option value="ALTA">ALTA</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="tecnico">
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Selecione um técnico</mat-label>
+        <mat-select
+          formControlName="tecnicoId"
+          required>
+          <mat-option *ngFor="let tec of tecnicos" [value]="tec.id">{{ tec.nome }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="empresa">
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Selecione uma empresa</mat-label>
+        <mat-select
+          formControlName="empresaId"
+          required>
+          <mat-option *ngFor="let emp of empresas" [value]="emp.id">{{ emp.nomeFantasia }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="valor">
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Valor</mat-label>
+        <input
+          matInput
+          type="number"
+          formControlName="valor"
+          required
+          placeholder="Ex. 1000.00">
+      </mat-form-field>
+    </div>
+
+    <div class="dataVisita">
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Data da Visita</mat-label>
+        <input
+          matInput
+          formControlName="dataVisita"
+          placeholder="Ex: dd/mm/aaaa">
+      </mat-form-field>
+    </div>
+
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Observações</mat-label>
+      <textarea
+        formControlName="observacoes"
+        required
+        class="observacoes"
+        matInput
+        placeholder="Ex. Detalhes do serviço a ser realizado"></textarea>
+    </mat-form-field>
+
+    <button (click)="update()" [disabled]="!formChamado.valid" class="full-width mat-elevation-z4" mat-raised-button color="primary">Atualizar</button>
+    <button routerLink="../" class="full-width mat-elevation-z4" mat-stroked-button color="warn">Cancelar</button>
+  </form>
+
+  <p class="full-width">Desenvolvido por Yuri Romão</p>
+</div>

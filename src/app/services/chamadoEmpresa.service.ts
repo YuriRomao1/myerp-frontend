@@ -12,7 +12,7 @@ export class ChamadoEmpresaService {
   constructor(private http: HttpClient) { }
 
   findById(id: any): Observable<ChamadoEmpresa> {
-    return this.http.get<ChamadoEmpresa>(`${API_CONFIG.baserUrl}/chamados/empresa${id}`);
+    return this.http.get<ChamadoEmpresa>(`${API_CONFIG.baserUrl}/chamados/empresa/${id}`);
   }
 
   findAll(): Observable<ChamadoEmpresa[]> {
@@ -24,6 +24,6 @@ export class ChamadoEmpresaService {
   }
 
   update(chamadoEmpresa: ChamadoEmpresa): Observable<ChamadoEmpresa> {
-    return this.http.put<ChamadoEmpresa>(`${API_CONFIG.baserUrl}/chamados/empresa${chamadoEmpresa.id}`, chamadoEmpresa);
+    return this.http.put<ChamadoEmpresa>(`${API_CONFIG.baserUrl}/chamados/empresa/${chamadoEmpresa.id}`, chamadoEmpresa);
   }
 }
