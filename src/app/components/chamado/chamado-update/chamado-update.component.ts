@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -17,6 +17,7 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-chamado-update',
+  standalone: true,
   imports: [
     FormsModule,
     ReactiveFormsModule,
@@ -28,9 +29,9 @@ import { CommonModule } from '@angular/common';
     CommonModule,
   ],
   templateUrl: './chamado-update.component.html',
-  styleUrl: './chamado-update.component.css'
+  styleUrls: ['./chamado-update.component.css']
 })
-export class ChamadoUpdateComponent {
+export class ChamadoUpdateComponent implements OnInit {
   chamado: Chamado = {
     prioridade:  '',
     status:      '',
@@ -40,19 +41,21 @@ export class ChamadoUpdateComponent {
     cliente:     '',
     nomeCliente: '',
     nomeTecnico: '',
-    valor:        0,
+    valor:       0,
   }
 
   clientes: Cliente[] = [];
   tecnicos: Tecnico[] = [];
 
-  prioridade: FormControl = new FormControl(null, [Validators.required]);
-  status:     FormControl = new FormControl(null, [Validators.required]);
-  titulo:     FormControl = new FormControl(null, [Validators.required]);
-  observacoes:FormControl = new FormControl(null, [Validators.required]);
-  tecnico:    FormControl = new FormControl(null, [Validators.required]);
-  cliente:    FormControl = new FormControl(null, [Validators.required]);
-valor: FormControl<any>;
+  formChamado = new FormGroup({
+    prioridade:  new FormControl('', [Validators.required]),
+    status:      new FormControl('', [Validators.required]),
+    titulo:      new FormControl('', [Validators.required]),
+    observacoes: new FormControl('', [Validators.required]),
+    tecnico:     new FormControl('', [Validators.required]),
+    cliente:     new FormControl('', [Validators.required]),
+    valor:       new FormControl(0, [Validators.required, Validators.min(0)])
+  });
 
   constructor(
     private chamadoService: ChamadoService,
@@ -64,23 +67,37 @@ valor: FormControl<any>;
   ) { }
 
   ngOnInit(): void {
-    this.chamado.id = this.route.snapshot.paramMap.get('id');
-    this.findById();
     this.findAllClientes();
     this.findAllTecnicos();
+    this.chamado.id = this.route.snapshot.paramMap.get('id');
+    this.findById();
   }
 
   findById(): void {
     this.chamadoService.findById(this.chamado.id).subscribe(resposta => {
       this.chamado = resposta;
+      this.formChamado.patchValue(resposta);
     }, error => {
       this.toastService.error(error.error.error);
     })
   }
 
   update(): void {
-    this.chamadoService.update(this.chamado).subscribe( resposta => {
-      this.toastService.success('Chamado atualizado com sucesso', 'Atualizar chamado');
+    const formValues = this.formChamado.value;
+
+    this.chamado = {
+      ...this.chamado,
+      titulo: formValues.titulo || '',
+      status: formValues.status?.toString() || '',
+      prioridade: formValues.prioridade || '',
+      tecnico: formValues.tecnico || '',
+      cliente: formValues.cliente || '',
+      observacoes: formValues.observacoes || '',
+      valor: Number(formValues.valor) || 0
+    };
+
+    this.chamadoService.update(this.chamado).subscribe(resposta => {
+      this.toastService.success('Chamado atualizado com sucesso!', 'Atualizar chamado');
       this.router.navigate(['chamados']);
     }, ex => {
       this.toastService.error(ex.error.error);
@@ -99,17 +116,7 @@ valor: FormControl<any>;
     });
   }
 
-  validaCampos(): boolean {
-    return this.prioridade.valid &&
-           this.status.valid &&
-           this.titulo.valid &&
-           this.observacoes.valid &&
-           this.tecnico.valid &&
-           this.cliente.valid &&
-           this.valor.valid;
-  }
-
-  retornaStatus(status: any): string {
+  retornaStatus(status: string): string {
     if(status == '0') {
       return 'ABERTO'
     } else if(status == '1') {
@@ -119,7 +126,7 @@ valor: FormControl<any>;
     }
   }
 
-  retornaPrioridade(prioridade: any): string {
+  retornaPrioridade(prioridade: string): string {
     if(prioridade == '0') {
       return 'BAIXA'
     } else if(prioridade == '1') {
@@ -127,5 +134,9 @@ valor: FormControl<any>;
     } else {
       return 'ALTA'
     }
+  }
+
+  validaCampos(): boolean {
+    return this.formChamado.valid;
   }
 }
