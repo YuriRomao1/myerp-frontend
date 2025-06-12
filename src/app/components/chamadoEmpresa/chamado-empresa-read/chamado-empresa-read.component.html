@@ -1,0 +1,106 @@
+<div class="container mat-elevation-z8">
+  <h1 class="full-width">Leitura de Chamado da Empresa</h1>
+  <img class="full-width" src="assets/img/chamado-create.svg" alt="Chamado image">
+
+  <form class="form" [formGroup]="formChamado">
+     <mat-form-field class="full-width" appearance="outline">
+       <mat-label>Título do chamado</mat-label>
+       <input
+       [(ngModel)]="chamadoEmpresa.titulo"
+       formControlName="titulo"
+       name="titulo"
+       matInput
+       placeholder="Ex. Instalação do Ar-Condionado 18000 Btus">
+     </mat-form-field>
+   </form>
+
+   <div class="status-prioridade">
+     <mat-form-field appearance="outline">
+        <mat-label>STATUS ({{ retornaStatus(chamadoEmpresa.status) }})</mat-label>
+        <mat-select
+        [(ngModel)]="chamadoEmpresa.status"
+        formControlName="status"
+        name="status">
+          <mat-option value="0">ABERTO</mat-option>
+          <mat-option value="1">EM ANDAMENTO</mat-option>
+          <mat-option value="2">ENCERRADO</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>PRIORIDADE ({{ retornaPrioridade(chamadoEmpresa.prioridade) }})</mat-label>
+        <mat-select
+        [(ngModel)]="chamadoEmpresa.prioridade"
+        formControlName="prioridade"
+        name="prioridade">
+          <mat-option value="0">BAIXA</mat-option>
+          <mat-option value="1">MÉDIA</mat-option>
+          <mat-option value="2">ALTA</mat-option>
+        </mat-select>
+      </mat-form-field>
+   </div>
+
+   <div class="tecnico">
+     <mat-form-field class="full-width" appearance="outline">
+        <mat-label>TÉCNICO ({{ chamadoEmpresa.nomeTecnico }})</mat-label>
+        <mat-select
+        [(ngModel)]="chamadoEmpresa.tecnicoId"
+        formControlName="tecnicoId"
+        name="tecnico">
+          <mat-option>{{ chamadoEmpresa.nomeTecnico }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+   </div>
+
+   <div class="empresa">
+     <mat-form-field class="full-width" appearance="outline">
+        <mat-label>EMPRESA ({{ chamadoEmpresa.nomeEmpresa }})</mat-label>
+        <mat-select
+        [(ngModel)]="chamadoEmpresa.empresaId"
+        formControlName="empresaId"
+        name="empresa">
+          <mat-option>{{ chamadoEmpresa.nomeEmpresa }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+   </div>
+
+   <div class="valor">
+     <mat-form-field class="full-width" appearance="outline">
+       <mat-label>Valor {{ chamadoEmpresa.valor }} R$</mat-label>
+       <input
+         matInput
+         [(ngModel)]="chamadoEmpresa.valor"
+         formControlName="valor"
+         name="valor"
+         type="number"
+         placeholder="Ex. 1000.00">
+     </mat-form-field>
+   </div>
+
+   <div class="data-visita">
+     <mat-form-field class="full-width" appearance="outline">
+       <mat-label>Data da Visita</mat-label>
+       <input
+         matInput
+         [(ngModel)]="chamadoEmpresa.dataVisita"
+         formControlName="dataVisita"
+         name="dataVisita"
+         type="date"
+         placeholder="Data da Visita">
+     </mat-form-field>
+   </div>
+
+   <form class="form" [formGroup]="formChamado">
+     <mat-form-field class="full-width" appearance="outline">
+       <mat-label>Observações</mat-label>
+       <textarea
+       [(ngModel)]="chamadoEmpresa.observacoes"
+       formControlName="observacoes"
+       name="observacoes"
+       class="observacoes"
+       matInput></textarea>
+     </mat-form-field>
+   </form>
+
+   <button routerLink="../../" class="full-width mat-elevation-z4" mat-stroked-button color="warn">Retornar</button>
+</div>
