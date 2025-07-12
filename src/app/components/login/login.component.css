@@ -1,29 +1,50 @@
 .container {
   height: 100%;
-  background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(37,97,207,1) 0%, rgba(0,212,255,1) 100%);
+  background: linear-gradient(180deg,
+    rgba(2,0,36,1)   0%,
+    rgba(37,97,207,1) 0%,
+    rgba(0,212,255,1) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+/* 1. Formulário um pouco menor */
 .form {
-  width: 30rem;
+  width: 28rem;           /* de 30rem para 28rem */
+  max-width: 90%;         /* limita em telas pequenas */
   margin: auto;
-  background-color: rgb(235, 235, 235);
-  padding: 4rem 1rem;
+  background-color: #ebeceb;
+  padding: 3rem 1rem;     /* de 4rem para 3rem */
   border-radius: 1rem;
+}
+
+/* 2. Imagem dentro do .form */
+.form img {
+  display: block;
+  width: auto;            /* deixa fluir conforme o container */
+  max-width: 75%;         /* nunca maior que 80% da .form */
+  max-height: 12rem;      /* altura máxima reduzida */
+  height: auto;           /* preserva proporção */
+  margin: 1rem auto;
+}
+
+/* 3. Ajustes responsivos */
+@media (max-width: 768px) {
+  .form {
+    width: 90%;           /* ocupa mais o espaço disponível */
+    padding: 2rem 1rem;   /* padding ainda menor */
+  }
+  .form img {
+    max-width: 60%;       /* imagem ainda menor em mobiles */
+    max-height: 10rem;    /* ajusta altura */
+    margin: 0.5rem auto 1rem;
+  }
 }
 
 h1 {
   width: 100%;
   text-align: center;
-
-}
-
-img {
-  height: 15rem;
-  width: 100%;
-  margin: 1.5rem auto 1.5rem auto;
 }
 
 .full-width {
